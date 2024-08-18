@@ -6,6 +6,8 @@ jobs:
   Explore-GitHub-Actions:
     # You need to use the INSTALLATION_NAME from the previous step
     runs-on: runner-set
+    environment: kubernetes
+    
     steps:
      - name: Checkout code
        uses: actions/checkout@v3
