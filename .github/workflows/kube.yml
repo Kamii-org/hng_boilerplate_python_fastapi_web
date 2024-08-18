@@ -17,4 +17,4 @@ jobs:
        run: cat hi.txt
 
      - name: Where
-       run: ls -lart 
+       run: pwd
