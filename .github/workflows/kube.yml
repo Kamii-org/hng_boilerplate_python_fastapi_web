@@ -7,6 +7,17 @@ jobs:
     # You need to use the INSTALLATION_NAME from the previous step
     runs-on: runner-set
     steps:
-    - run: 
-        echo "🎉 This job uses runner scale set runners!"
-        echo "Hello muhfucka" > hello.txt
+     - name: Checkout code
+       uses: actions/checkout@v3
+
+     - name: Set up SSH
+       uses: webfactory/ssh-agent@v0.7.0
+       with:
+         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+     - name: Say Hi
+       run: |
+        echo "Deploying main branch..."
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          echo hello > hi.txt
+        EOF
