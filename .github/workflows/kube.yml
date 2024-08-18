@@ -4,22 +4,17 @@ on:
 
 jobs:
   Explore-GitHub-Actions:
-    # You need to use the INSTALLATION_NAME from the previous step
     runs-on: runner-set
-    environment: kubernetes
     
     steps:
      - name: Checkout code
        uses: actions/checkout@v3
 
-     - name: Set up SSH
-       uses: webfactory/ssh-agent@v0.7.0
-       with:
-         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+     - name: create a file
+       run: echo "Hello World" > hi.txt
 
-     - name: Say Hi
-       run: |
-        echo "Deploying main branch..."
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-          echo hello > hi.txt
-        EOF
+     - name: Show file
+       run: cat hi.txt
+
+     - name: Where
+       run: ls -lart 
