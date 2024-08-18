@@ -10,11 +10,5 @@ jobs:
      - name: Checkout code
        uses: actions/checkout@v3
 
-     - name: create a file
-       run: echo "Hello World" > hi.txt
-
-     - name: Show file
-       run: cat hi.txt
-
-     - name: Where
-       run: pwd
+     - name: Create a file in a persistent directory
+       run: echo "Hello World" > /home/ubuntu/hi.txt
