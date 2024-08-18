@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: github-actions-runner-bind
+  namespace: runner
+  labels:
+    app: github-runners
+subjects:
+  - kind: ServiceAccount
+    name: github-actions-runner
+    namespace: runner
+roleRef:
+  kind: Role
+  name: github-actions-runner-role
+  apiGroup: rbac.authorization.k8s.io
