@@ -1,0 +1,37 @@
+ubuntu@ip-10-0-0-47:~$ cat runner-values.yaml
+githubConfigUrl: "https://github.com/Kamii-org/hng_boilerplate_python_fastapi_web"
+
+githubConfigSecret:
+  github_token: ${TOKEN}
+
+## proxy can be used to define proxy settings that will be used by the
+## controller, the listener and the runner of this scale set.
+#
+# proxy:
+#   http:
+#     url: http://proxy.com:1234
+#     credentialSecretRef: proxy-auth # a secret with `username` and `password` keys
+#   https:
+#     url: http://proxy.com:1234
+#     credentialSecretRef: proxy-auth # a secret with `username` and `password` keys
+#   noProxy:
+#     - example.com
+#     - example.org
+
+maxRunners: 5
+minRunners: 1
+
+template:
+  metadata:
+    labels:
+      app: github-runners
+  spec:
+    containers:
+      - name: runner
+        image: ghcr.io/actions/actions-runner:latest
+        command: ["/home/runner/run.sh"]
+
+
+controllerServiceAccount:
+  namespace: runner-operator
+  name: runner-operator
