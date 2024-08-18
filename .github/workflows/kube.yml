@@ -1,7 +1,8 @@
 name: Actions Runner Controller Demo
 on:
-  workflow_dispatch:
-
+  push:
+    branches:
+      - devops
 jobs:
   Explore-GitHub-Actions:
     runs-on: kamii-runners
