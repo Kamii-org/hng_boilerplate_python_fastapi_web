@@ -2,7 +2,7 @@ name: Actions Runner Controller Demo
 on:
   push:
     branches:
-      - devops
+      - kube
 jobs:
   Explore-GitHub-Actions:
     runs-on: kamii-runners
