@@ -1,0 +1,42 @@
+ubuntu@ip-10-0-0-47:~$ cat controller-role-binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: runner-operator
+  namespace: runners
+  labels:
+    app: github-runners
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log", "pods/exec", "pods/status", "services", "endpoints", "secrets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "statefulsets", "replicasets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+- apiGroups: ["actions.github.com"]
+  resources: ["autoscalingrunnersets"]
+  verbs: ["get", "list", "watch", "create", "delete", "patch"]
+- apiGroups: ["extensions"]
+  resources: ["ingresses"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["autoscaling"]
+  resources: ["horizontalpodautoscalers"]
+  verbs: ["get", "list", "watch"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: runner-operator
+  namespace: runners
+  labels:
+    app: github-runners
+subjects:
+- kind: ServiceAccount
+  name: runner-operator
+  namespace: runner-operator
+roleRef:
+  kind: Role
+  name: runner-operator
+  apiGroup: rbac.authorization.k8s.io
