@@ -1,0 +1,33 @@
+name: K8s Runner Demo
+on:
+  workflow_dispatch:
+  
+jobs:
+  WorkflowTest:
+    runs-on: kamii-runners
+    environment: kubernetes
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openssh-client
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
+    - name: Set up SSH Agent
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Sample workflow
+      run: |
+        echo "Deploying main branch..."
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          echo hello > hi.txt
+        EOF
