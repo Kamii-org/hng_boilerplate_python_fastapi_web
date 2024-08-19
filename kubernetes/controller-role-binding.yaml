@@ -1,4 +1,3 @@
-ubuntu@ip-10-0-0-47:~$ cat controller-role-binding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
