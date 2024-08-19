@@ -35,6 +35,7 @@ apt install -y helm kubectl
 
 
 echo "export NAMESPACE=runners" >> .bashrc
+echo "export CONTROLLER_NAMESPACE=operator" >> .bashrc
 echo "export TOKEN=<your-token>" >> .bashrc
 source .bashrc
 
