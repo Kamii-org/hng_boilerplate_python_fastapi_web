@@ -43,23 +43,23 @@ newgrp docker
 
 echo "Dependencies are fully installed"
 
-echo "setting up ssh keys"
-#!/bin/bash
+# echo "setting up ssh keys"
+# #!/bin/bash
 
-# Variables
-KEY_NAME="github_deploy_key"
-KEY_PATH="/home/ubuntu/.ssh/$KEY_NAME"
-PUBLIC_KEY_PATH="$KEY_PATH.pub"
+# # Variables
+# KEY_NAME="github_deploy_key"
+# KEY_PATH="/home/ubuntu/.ssh/$KEY_NAME"
+# PUBLIC_KEY_PATH="$KEY_PATH.pub"
 
-# Generate SSH key pair
-echo "Generating SSH key pair..."
-ssh-keygen -t rsa -b 4096 -f "$KEY_PATH" -N ""
+# # Generate SSH key pair
+# echo "Generating SSH key pair..."
+# ssh-keygen -t rsa -b 4096 -f "$KEY_PATH" -N ""
 
-# Append public key to authorized_keys
-echo "Adding public key to authorized_keys..."
-cat "$PUBLIC_KEY_PATH" >> /home/ubuntu/.ssh/authorized_keys
+# # Append public key to authorized_keys
+# echo "Adding public key to authorized_keys..."
+# cat "$PUBLIC_KEY_PATH" >> /home/ubuntu/.ssh/authorized_keys
 
-echo "SSH key setup is complete. Please add the private key to your GitHub repository secrets."
-sleep 5
-clear
-sudo cat /home/ubuntu/.ssh/github_deploy_key
+# echo "SSH key setup is complete. Please add the private key to your GitHub repository secrets."
+# sleep 5
+# clear
+# sudo cat /home/ubuntu/.ssh/github_deploy_key
